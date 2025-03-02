@@ -10,6 +10,7 @@ An ensemble of AI models for classifying wildlife in camera trap images.
   - [Running the models](#running-the-models)
   - [Using GPUs](#using-gpus)
   - [Running each component separately](#running-each-component-separately)
+- [Downloading SpeciesNet model weights directly](#downloading-speciesnet-model-weights-directly)
 - [Contacting us](#contacting-us)
 - [Citing SpeciesNet](#citing-speciesnet)
 - [Supported models](#supported-models)
@@ -43,7 +44,7 @@ Gadot T, Istrate Ș, Kim H, Morris D, Beery S, Birch T, Ahumada J. [To crop or n
 
 The instructions on this page will assume that you have a Python virtual environment set up.  If you have not installed Python, or you are not familiar with Python virtual environments, start with our [installing Python](installing-python.md) page.  If you see a prompt that looks something like the following, you're all set to proceed to the next step:
 
-![speciesnet conda prompt](images/conda-prompt-speciesnet.png)
+![speciesnet conda prompt](https://github.com/google/cameratrapai/raw/main/images/conda-prompt-speciesnet.png)
 
 ### Installing the SpeciesNet Python package
 
@@ -89,7 +90,7 @@ If you have an NVIDIA GPU, you should be able to use it for both the detection a
 
 #### 1. TensorFlow can only use GPUs in Windows inside WSL
 
-Recent versions of TensorFlow do not support GPUs on "native Windows".  Everything will work fine on Windows, by our code won't use your GPU to run the classifier.  However, TensorFlow *does* support GPUs in [WSL](https://learn.microsoft.com/en-us/windows/wsl/) (the Windows Subsystem for Linux), which has available as part of Windows since Windows 10, and is installed by default in Windows 11.  WSL is like a Linux prompt that runs inside your Windows OS.  If you're using Windows, and it's working great, but you want to use your GPU, try WSL, and feel free to [email us](mailto:cameratraps@google.com) if you get stuck setting things up in WSL.
+Recent versions of TensorFlow do not support GPUs on "native Windows".  Everything will work fine on Windows, but our code won't use your GPU to run the classifier.  However, TensorFlow *does* support GPUs in [WSL](https://learn.microsoft.com/en-us/windows/wsl/) (the Windows Subsystem for Linux), which has available as part of Windows since Windows 10, and is installed by default in Windows 11.  WSL is like a Linux prompt that runs inside your Windows OS.  If you're using Windows, and it's working great, but you want to use your GPU, try WSL, and feel free to [email us](mailto:cameratraps@google.com) if you get stuck setting things up in WSL.
 
 #### 2. TensorFlow and PyTorch don't usually like using the GPU in the same Python environment
 
@@ -126,6 +127,15 @@ Rather than running everything at once, you may want to run the detection, class
 - Run the ensemble step, passing both the files that you just created, which contain the detection and classification results:  
 
   > ```python -m speciesnet.scripts.run_model.py --ensemble_only --folders "c:\your\image\folder" --predictions_json "c:\your_ensemble_output_file.json" --detections_json "c:\your_detector_output_file.json" --classifications_json "c:\your_clasifier_output_file.json"```  
+
+## Downloading SpeciesNet model weights directly
+
+The `run_model.py` script recommended above will download model weights automatically.  If you want to use the SpeciesNet model weights outside of our script, or if you plan to be offline when you first run the script, you can download model weights directly from Kaggle.  Running our ensemble also requires [MegaDetector](https://github.com/agentmorris/MegaDetector), so in this list of links, we also include a direct link to the MegaDetector model weights.
+
+* [SpeciesNet page on Kaggle](https://www.kaggle.com/models/google/speciesnet)
+* [Direct link to version 4.0.0a weights](https://www.kaggle.com/api/v1/models/google/speciesnet/keras/v4.0.0a/3/download) (the crop classifier)
+* [Direct link to version 4.0.0b weights](https://www.kaggle.com/api/v1/models/google/speciesnet/keras/v4.0.0b/3/download) (the whole-image classifier)
+* [Direct link to MegaDetector weights](https://github.com/agentmorris/MegaDetector/releases/download/v5.0/md_v5a.0.0.pt)
 
 ## Contacting us
 
@@ -385,7 +395,7 @@ If you submit a PR to contribute your code back to this repo, you will be asked 
 
 It would be unfortunate if this whole README about camera trap images didn't show you a single camera trap image, so...
 
-![giant armadillo](images/sample_image_oct.jpg)
+![giant armadillo](https://github.com/google/cameratrapai/raw/main/images/sample_image_oct.jpg)
 
 Image credit University of Minnesota, from the [Orinoquía Camera Traps](https://lila.science/datasets/orinoquia-camera-traps/) dataset.
 
